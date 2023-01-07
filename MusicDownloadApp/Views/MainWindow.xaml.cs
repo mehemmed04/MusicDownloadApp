@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicDownloadApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,9 @@ namespace MusicDownloadApp
         public MainWindow()
         {
             InitializeComponent();
-
+            MainViewModel mvm = new MainViewModel();
+            mvm.MusicsWrapPanel = MusicsWrapPanel;
+            DataContext = mvm;
         }
     }
 }

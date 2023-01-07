@@ -172,6 +172,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -195,10 +196,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Models\Music.cs" />
     <Compile Include="Services\MusicService.cs" />
+    <Compile Include="ViewModels\AddMusicViewModel.cs" />
+    <Compile Include="ViewModels\MusicUCViewModel.cs" />
     <Compile Include="Views\MusicUC.xaml.cs">
       <DependentUpon>MusicUC.xaml</DependentUpon>
     </Compile>
+    <Page Include="Dictionaires\ButtonDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddMusicWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -253,7 +261,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Resource Include="Images\3point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\addmusic.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

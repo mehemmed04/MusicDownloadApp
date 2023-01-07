@@ -6,8 +6,43 @@
         xmlns:local="clr-namespace:MusicDownloadApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        <
-        
+    <StackPanel Orientation="Horizontal">
+
+        <ScrollViewer 
+            Height="380"
+                x:Name="MyScrollViewer"
+            HorizontalScrollBarVisibility="Disabled"
+                VerticalScrollBarVisibility="Auto">
+            <WrapPanel 
+        Orientation="Vertical"
+        Name="MusicsWrapPanel"
+                Width="600"
+         >
+            </WrapPanel>
+        </ScrollViewer>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="180">
+
+            <Border 
+            Height="60"
+            Margin="0,15"
+            BorderThickness="1"
+            Width="60"
+            BorderBrush="Black"
+            CornerRadius="50">
+                <Button
+                Command="{Binding AddMusicCommand}"
+                Margin="5"
+            Width="50"
+            Height="50"
+            >
+                    <Button.Background>
+                        <ImageBrush ImageSource="../Images/addmusic.png"/>
+                    </Button.Background>
+                </Button>
+            </Border>
+
+        </StackPanel>
     </StackPanel>
 </Window>

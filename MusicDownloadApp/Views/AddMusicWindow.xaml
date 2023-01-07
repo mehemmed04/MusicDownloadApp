@@ -5,8 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicDownloadApp.Views"
         mc:Ignorable="d"
-        Title="AddMusicWindow" Height="450" Width="500">
+        Title="AddMusicWindow" Height="250" Width="630">
     <StackPanel>
-        
+        <StackPanel Orientation="Horizontal"
+                    Margin="10,10">
+            <TextBlock FontSize="20" FontWeight="DemiBold" Text="Url : "/>
+            <TextBox FontSize="18" Width="500"
+                     Text="{Binding Music.Url}"></TextBox>
+        </StackPanel>
+
+        <StackPanel Margin="10,10"
+                    Orientation="Horizontal">
+            <TextBlock FontSize="20" FontWeight="DemiBold" Text="MP3 Filename : "/>
+            <TextBox FontSize="18" Width="400"
+                      Text="{Binding Music.Name}"></TextBox>
+        </StackPanel>
+
+        <StackPanel Margin="10,10"
+                    Orientation="Horizontal">
+            <TextBlock FontSize="20" FontWeight="DemiBold" Text="Path : "/>
+            <TextBox FontSize="18" Width="490"
+                      Text="{Binding Path,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Button Width="30"
+                    Margin="2,7"
+                    Command="{Binding SelectFilePathCommand}">
+                <Button.Background >
+                    <ImageBrush ImageSource="../Images/3point.png"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+        <Border
+            Margin="0,20"
+            BorderBrush="Black"
+            BorderThickness="1"
+            CornerRadius="20"
+            Width="200">
+            
+        <Button FontSize="22"
+                Foreground="Green"
+                Command="{Binding DownloadCommand}">Download</Button>
+        </Border>
+
     </StackPanel>
 </Window>
