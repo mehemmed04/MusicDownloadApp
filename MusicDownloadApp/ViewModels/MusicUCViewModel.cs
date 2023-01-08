@@ -13,9 +13,7 @@ namespace MusicDownloadApp.ViewModels
 {
     public class MusicUCViewModel : BaseViewModel
     {
-        CancellationTokenSource source = new CancellationTokenSource();
-        public CancellationToken token;
-        public Task _task { get; set; }
+        public Thread _task { get; set; }
 
         private Music music;
 
@@ -68,9 +66,8 @@ namespace MusicDownloadApp.ViewModels
             set { statusColor = value; OnPropertyChanged(); }
         }
 
-        public MusicUCViewModel(Music music, Task task)
+        public MusicUCViewModel(Music music, Thread task)
         {
-            token = source.Token;
             _task = task;
             Timer = new DispatcherTimer();
             Second = 0;
@@ -88,39 +85,24 @@ namespace MusicDownloadApp.ViewModels
                 StatusColor = "Red";
                 Status = "Paused";
                 Timer.Stop();
-               // _task.Wait();
+                MessageBox.Show("timer stopped");
+                _task.Suspend();
 
             },
             (p) =>
             {
-                try
-                {
-                    return Timer.IsEnabled && _task != null;
-
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
+                return true;
             });
 
             PlayCommand = new RelayCommand((o) =>
             {
                 StatusColor = "Black";
                 Status = "Downloading ...";
-                //task continiue
-
+                _task.Resume();
             },
            (p) =>
            {
-               try
-               {
-                   return !Timer.IsEnabled && _task != null ;
-               }
-               catch (Exception)
-               {
-                   return false;
-               }
+               return true;
            });
 
             CancelCommand = new RelayCommand((o) =>
@@ -129,18 +111,11 @@ namespace MusicDownloadApp.ViewModels
                 StatusColor = "Red";
                 Status = "Cancelled";
                 Timer.Stop();
-                source.Cancel();
+                _task.Abort();
             },
            (p) =>
            {
-               try
-               {
-                   return true && _task != null && source != null;
-               }
-               catch (Exception)
-               {
-                   return false;
-               }
+               return true;
            });
 
         }

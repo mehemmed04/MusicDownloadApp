@@ -25,12 +25,12 @@ namespace MusicDownloadApp.ViewModels
                 amw.ShowDialog();
                 if (amwm.IsClicked)
                 {
-                    Task task = null;
+                    Thread task = null;
                     MusicUCViewModel mvm = new MusicUCViewModel(amwm.Music,task);
                     MusicUC musicUC = new MusicUC();
                     musicUC.DataContext = mvm;
                     MusicsWrapPanel.Children.Add(musicUC);
-                    MusicService.SaveMP3(mvm,task,mvm.token);
+                    MusicService.SaveMP3(mvm,task);
                     
                 }
 

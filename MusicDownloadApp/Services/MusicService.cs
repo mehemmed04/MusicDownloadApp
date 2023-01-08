@@ -15,10 +15,10 @@ namespace MusicDownloadApp.Services
 {
     public class MusicService
     {
-        public static async void SaveMP3(MusicUCViewModel viewmodel,Task task, CancellationToken token)
+        public static async void SaveMP3(MusicUCViewModel viewmodel,Thread task)
         {
             var music = viewmodel.Music;
-            task = new Task(() =>
+            task = new Thread(() =>
             {
                 try
                 {
@@ -47,7 +47,7 @@ namespace MusicDownloadApp.Services
                     viewmodel.StatusColor = "Red";
                     viewmodel.Status = "Cancelled. " + ex.Message;
                 }
-            },token);
+            });
             task.Start();
         }
     }
