@@ -30,7 +30,8 @@ namespace MusicDownloadApp.ViewModels
                     MusicUC musicUC = new MusicUC();
                     musicUC.DataContext = mvm;
                     MusicsWrapPanel.Children.Add(musicUC);
-                    MusicService.SaveMP3(mvm,task);
+                    MusicService.SaveMP3(mvm,task,mvm.token);
+                    
                 }
 
             });

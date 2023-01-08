@@ -39,7 +39,7 @@ namespace MusicDownloadApp.ViewModels
         public AddMusicViewModel(AddMusicWindow window)
         {
             Music = new Music();
-            Music.Path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\";
+            Path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\";
             _window = window;
             DownloadCommand = new RelayCommand((o) =>
             {

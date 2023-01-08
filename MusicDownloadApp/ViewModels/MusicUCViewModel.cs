@@ -6,14 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace MusicDownloadApp.ViewModels
 {
     public class MusicUCViewModel : BaseViewModel
     {
-
-        private Task _task { get; set; }
+        CancellationTokenSource source = new CancellationTokenSource();
+        public CancellationToken token;
+        public Task _task { get; set; }
 
         private Music music;
 
@@ -68,6 +70,7 @@ namespace MusicDownloadApp.ViewModels
 
         public MusicUCViewModel(Music music, Task task)
         {
+            token = source.Token;
             _task = task;
             Timer = new DispatcherTimer();
             Second = 0;
@@ -82,23 +85,17 @@ namespace MusicDownloadApp.ViewModels
 
             PauseCommand = new RelayCommand((o) =>
             {
-                try
-                {
-                    Timer.Stop();
-                    _task.Wait();
-                    StatusColor = "Red";
-                    Status = "Paused";
-                }
-                catch (Exception)
-                {
+                StatusColor = "Red";
+                Status = "Paused";
+                Timer.Stop();
+               // _task.Wait();
 
-                }
             },
             (p) =>
             {
                 try
                 {
-                    return Timer.IsEnabled;
+                    return Timer.IsEnabled && _task != null;
 
                 }
                 catch (Exception)
@@ -109,23 +106,16 @@ namespace MusicDownloadApp.ViewModels
 
             PlayCommand = new RelayCommand((o) =>
             {
-                try
-                {
-                    Timer.Start();
-                    _task.Start();
-                    StatusColor = "Red";
-                    Status = "Paused";
-                }
-                catch (Exception)
-                {
+                StatusColor = "Black";
+                Status = "Downloading ...";
+                //task continiue
 
-                }
             },
            (p) =>
            {
                try
                {
-                   return !Timer.IsEnabled;
+                   return !Timer.IsEnabled && _task != null ;
                }
                catch (Exception)
                {
@@ -135,23 +125,17 @@ namespace MusicDownloadApp.ViewModels
 
             CancelCommand = new RelayCommand((o) =>
             {
-                try
-                {
-                    _task.Dispose();
-                    StatusColor = "Red";
-                    Status = "Cancelled";
 
-                }
-                catch (Exception)
-                {
-
-                }
+                StatusColor = "Red";
+                Status = "Cancelled";
+                Timer.Stop();
+                source.Cancel();
             },
            (p) =>
            {
                try
                {
-                   return true;
+                   return true && _task != null && source != null;
                }
                catch (Exception)
                {

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using VideoLibrary;
 
@@ -14,13 +15,14 @@ namespace MusicDownloadApp.Services
 {
     public class MusicService
     {
-        public static async void SaveMP3(MusicUCViewModel viewmodel,Task task)
+        public static async void SaveMP3(MusicUCViewModel viewmodel,Task task, CancellationToken token)
         {
             var music = viewmodel.Music;
             task = new Task(() =>
             {
                 try
                 {
+                    viewmodel._task = task;
                     string source = music.Path;
                     var youtube = YouTube.Default;
                     var vid = youtube.GetVideo(music.Url);
@@ -45,7 +47,7 @@ namespace MusicDownloadApp.Services
                     viewmodel.StatusColor = "Red";
                     viewmodel.Status = "Cancelled. " + ex.Message;
                 }
-            });
+            },token);
             task.Start();
         }
     }
