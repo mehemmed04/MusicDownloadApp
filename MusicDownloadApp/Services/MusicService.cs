@@ -14,10 +14,10 @@ namespace MusicDownloadApp.Services
 {
     public class MusicService
     {
-        public static async void SaveMP3(MusicUCViewModel viewmodel)
+        public static async void SaveMP3(MusicUCViewModel viewmodel,Task task)
         {
             var music = viewmodel.Music;
-            var task = new Task(() =>
+            task = new Task(() =>
             {
                 try
                 {

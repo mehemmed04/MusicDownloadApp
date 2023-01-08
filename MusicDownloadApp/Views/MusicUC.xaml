@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MusicDownloadApp.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="160" d:DesignWidth="650"
+             d:DesignHeight="200" d:DesignWidth="650"
              BorderBrush="red"
              BorderThickness="0,0,0,1">
     <StackPanel Background="White"
@@ -36,6 +36,46 @@
 
         </StackPanel>
 
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+           
+                <Button
+                Command="{Binding PauseCommand}"
+                Margin="20,5"
+            Width="25"
+            Height="25"
+            >
+                    <Button.Background>
+                        <ImageBrush ImageSource="../Images/pause.png"/>
+                    </Button.Background>
+                </Button>
+
+
+            <Button
+                Command="{Binding PlayCommand}"
+                Margin="20,5"
+            Width="25"
+            Height="25"
+            >
+                <Button.Background>
+                    <ImageBrush ImageSource="../Images/play.png"/>
+                </Button.Background>
+            </Button>
+
+
+            <Button
+                Command="{Binding CancelCommand}"
+                Margin="20,5"
+            Width="25"
+            Height="25"
+            >
+                <Button.Background>
+                    <ImageBrush ImageSource="../Images/cancel.png"/>
+                </Button.Background>
+            </Button>
+
+        </StackPanel>
         <TextBlock Margin="0,10" FontSize="18" Foreground="{Binding StatusColor}" Text="{Binding Status}"></TextBlock>
         
     </StackPanel>
