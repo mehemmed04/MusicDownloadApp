@@ -15,7 +15,7 @@ namespace MusicDownloadApp.Services
 {
     public class MusicService
     {
-        public static async void SaveMP3(MusicUCViewModel viewmodel,Thread task)
+        public static async void SaveMP3(MusicUCViewModel viewmodel, Thread task)
         {
             var music = viewmodel.Music;
             task = new Thread(() =>
@@ -27,6 +27,27 @@ namespace MusicDownloadApp.Services
                     var youtube = YouTube.Default;
                     var vid = youtube.GetVideo(music.Url);
                     string videopath = Path.Combine(source, vid.FullName);
+                    //byte[] bytes = new byte[0];
+                    //Task.Run(() =>
+                    //{
+                    //    while (true)
+                    //    {
+                    //        string v = " Byte";
+                    //        double size = bytes.Length;
+                    //        if(size > 1024)
+                    //        {
+                    //            size /= 1024;
+                    //            v = " Kb";
+                    //        }
+                    //        if (size > 1024)
+                    //        {
+                    //            size /= 1024;
+                    //            v = " Mb";
+                    //        }
+                    //        viewmodel.Size = size;
+                    //        viewmodel.ValueOfSize = v;
+                    //    }
+                    //});
                     byte[] bytes = vid.GetBytes();
                     File.WriteAllBytes(videopath, bytes);
                     var inputFile = new MediaFile { Filename = Path.Combine(source, vid.FullName) };

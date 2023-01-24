@@ -23,6 +23,23 @@ namespace MusicDownloadApp.ViewModels
             set { music = value; OnPropertyChanged(); }
         }
 
+        private double size;
+
+        public double Size
+        {
+            get { return size; }
+            set { size = value; OnPropertyChanged(); }
+        }
+
+        private string valueOfSize;
+
+        public string ValueOfSize
+        {
+            get { return valueOfSize; }
+            set { valueOfSize = value; OnPropertyChanged(); }
+        }
+
+
         private int second;
 
         public int Second

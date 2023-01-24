@@ -36,7 +36,15 @@
 
         </StackPanel>
 
+        <!--<StackPanel Orientation="Horizontal">
+            <TextBlock FontSize="18" Text="Downloaded Size : "></TextBlock>
 
+            <TextBlock FontSize="18" Text="{Binding Size,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock FontSize="18" Text="{Binding ValueOfSize,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+
+        </StackPanel>-->
+        
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
            
